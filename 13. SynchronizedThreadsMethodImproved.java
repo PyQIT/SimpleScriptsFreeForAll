@@ -7,6 +7,7 @@ class MyClass{
             if (i == 20000) {
                 System.out.println(name + " wartosc interatora: " + i);
                 Thread.sleep(200);
+                break;
             }
         }
     }
@@ -29,7 +30,7 @@ class MyThread implements Runnable {
 
         try {
             for (int count = 0; count < 10; count++) {
-                Thread.sleep(2000);
+                Thread.sleep(200);
                 m.test(thrd.getName());
             }
         } catch (InterruptedException ex) {
