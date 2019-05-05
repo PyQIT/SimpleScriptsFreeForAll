@@ -1,5 +1,5 @@
 enum TrafficLightColor{
-        ZIELONE, ZOLTE, CZERWONE, ZOLTE1
+        GREEN, YELLOW, RED, YELLOW1
 }
 
 class TrafficLightSimulator implements  Runnable{
@@ -9,7 +9,7 @@ class TrafficLightSimulator implements  Runnable{
     boolean change = false;
 
     TrafficLightSimulator(){
-        tmp = TrafficLightColor.CZERWONE;
+        tmp = TrafficLightColor.RED;
         thd = new Thread(this);
         thd.start();
     }
@@ -18,16 +18,16 @@ class TrafficLightSimulator implements  Runnable{
         while(!stop){
             try{
                 switch (tmp){
-                    case CZERWONE:
+                    case RED:
                         Thread.sleep(5000);
                         break;
-                    case ZOLTE:
+                    case YELLOW:
                         Thread.sleep(2000);
                         break;
-                    case ZIELONE:
+                    case GREEN:
                         Thread.sleep(5000);
                         break;
-                    case ZOLTE1:
+                    case YELLOW1:
                         Thread.sleep(2000);
                         break;
                 }
@@ -40,17 +40,17 @@ class TrafficLightSimulator implements  Runnable{
 
     synchronized private void changeColor(){
         switch(tmp){
-            case CZERWONE:
-                tmp = TrafficLightColor.ZOLTE1;
+            case RED:
+                tmp = TrafficLightColor.YELLOW1;
                 break;
-            case ZOLTE:
-                tmp = TrafficLightColor.CZERWONE;
+            case YELLOW:
+                tmp = TrafficLightColor.RED;
                 break;
-            case ZIELONE:
-                tmp = TrafficLightColor.ZOLTE;
+            case GREEN:
+                tmp = TrafficLightColor.YELLOW;
                 break;
-            case ZOLTE1:
-                tmp = TrafficLightColor.ZIELONE;
+            case YELLOW1:
+                tmp = TrafficLightColor.GREEN;
         }
         change = true;
         notify();
@@ -68,8 +68,8 @@ class TrafficLightSimulator implements  Runnable{
 
     synchronized TrafficLightColor getColor(){
         TrafficLightColor tmp2;
-        if(tmp == TrafficLightColor.ZOLTE1) {
-            tmp2 = TrafficLightColor.ZOLTE;
+        if(tmp == TrafficLightColor.YELLOW1) {
+            tmp2 = TrafficLightColor.YELLOW;
             return tmp2;
         }
         else
